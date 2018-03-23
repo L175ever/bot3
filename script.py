@@ -44,7 +44,7 @@ now = datetime.datetime.now()
 def main():  
     new_offset = None
     today = now.day
-    hour = now.hour + 22
+    hour = now.hour
 
     while True:
         greet_bot.get_updates(new_offset)
@@ -57,15 +57,15 @@ def main():
         last_chat_id = last_update['message']['chat']['id']
         last_chat_name = last_update['message']['chat']['first_name']
 
-        if last_chat_text.lower() in greetings and now.day <= today and 6 <= hour < 12:
+        if last_chat_text.lower() in greetings and now.day == today and 6 <= hour < 12:
             greet_bot.send_message(last_chat_id, 'Доброе утро, {},{}'.format(last_chat_name, today))
 ##            today += 1
 
-        elif last_chat_text.lower() in greetings and now.day <= today and 12 <= hour < 17:
+        elif last_chat_text.lower() in greetings and now.day == today and 12 <= hour < 17:
             greet_bot.send_message(last_chat_id, 'Добрый день, {},{}'.format(last_chat_name, today))
 ##            today += 1
 
-        elif last_chat_text.lower() in greetings and now.day <= today and 17 <= hour < 23:
+        elif last_chat_text.lower() in greetings and now.day == today and 17 <= hour < 23:
             greet_bot.send_message(last_chat_id, 'Добрый вечер, {},{}'.format(last_chat_name, today))
 ##            today += 1
 
