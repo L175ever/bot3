@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Telegram bot tutorial: https://djangostars.com/blog/how-to-create-and-deploy-a-telegram-bot/
-              in Russian: https://tproger.ru/translations/telegram-bot-create-and-deploy/"""
+
 
 import requests  
 import datetime
