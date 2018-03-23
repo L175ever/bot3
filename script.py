@@ -5,7 +5,7 @@
 
 import requests  
 import datetime
-from django.utils.timezone import now, pytz
+
 
 class BotHandler:
 
@@ -42,11 +42,6 @@ greet_bot = BotHandler(token)
 greetings = ('здравствуй', 'привет', 'ку', 'здорово')  
 now = datetime.datetime.now()
 
-user_timezone = pytz.timezone(user.timezone or settings.TIME_ZONE)
-now().astimezone(user_timezone)
-now = datetime.datetime.now()
-TIME_ZONE = 'Europe/Moscow'
-USE_TZ = True
 
 def main():  
     new_offset = None
