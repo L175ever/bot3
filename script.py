@@ -5,7 +5,6 @@
 
 import requests  
 import datetime
-#import pytz
 
 class BotHandler:
 
@@ -41,11 +40,6 @@ token = "441518222:AAFSlYWYs7hMdj0S_w6fOIZuR76rFY1D5uY"
 greet_bot = BotHandler(token)  
 greetings = ('здравствуй', 'привет', 'ку', 'здорово')  
 now = datetime.datetime.now()
-
-#now = pytz.utc.localize(datetime(2014, 11, 13, 7, 44, 43))
-#usa_time = pytz.timezone('Etc/GMT-4')
-#now.astimezone(usa_time)
-
 
 def main():  
     new_offset = None
