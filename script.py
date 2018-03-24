@@ -5,6 +5,8 @@
 
 import requests  
 import datetime
+import pytz
+
 
 class BotHandler:
 
@@ -39,7 +41,12 @@ class BotHandler:
 token = "441518222:AAFSlYWYs7hMdj0S_w6fOIZuR76rFY1D5uY"
 greet_bot = BotHandler(token)  
 greetings = ('здравствуй', 'привет', 'ку', 'здорово')  
-now = datetime.datetime.now()
+#now = datetime.datetime.now()
+
+utc_now = pytz.utc.localize(datetime.datetime.utcnow())
+now = utc_now.astimezone(pytz.timezone("America/Los_Angeles"))
+
+print (now)
 
 def main():  
     new_offset = None
@@ -55,14 +62,14 @@ def main():
         last_update_id = last_update['update_id']
         last_chat_text = last_update['message']['text']
         last_chat_id = last_update['message']['chat']['id']
-        last_chat_name = last_update['message']['chat'] # ['first_name']
+        last_chat_name = last_update['message']['chat']['first_name']
 
         if last_chat_text.lower() in greetings and now.day == today and 6 <= hour < 12:
-            greet_bot.send_message(last_chat_id, 'Доброе утро, {},{}'.format(last_chat_name, hour))
+            greet_bot.send_message(last_chat_id, 'Доброе утро, {}'.format(last_chat_name))
 ##            today += 1
 
         elif last_chat_text.lower() in greetings and now.day == today and 12 <= hour < 17:
-            greet_bot.send_message(last_chat_id, 'Добрый день, {},{}'.format(last_chat_name, hour))
+            greet_bot.send_message(last_chat_id, 'Добрый день, {}'.format(last_chat_name))
 ##            today += 1
 
         elif last_chat_text.lower() in greetings and now.day == today and 17 <= hour < 23:
