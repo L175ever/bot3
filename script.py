@@ -44,7 +44,7 @@ greetings = ('здравствуй', 'привет', 'ку', 'здорово')
 #now = datetime.datetime.now()
 
 utc_now = pytz.utc.localize(datetime.datetime.utcnow())
-now = utc_now.astimezone(pytz.timezone("America/Los_Angeles"))
+now = utc_now.astimezone(pytz.timezone("Europe/Moscow"))
 
 print (now)
 
