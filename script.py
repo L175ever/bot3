@@ -9,6 +9,11 @@ class BotHandler:
     def __init__(self, token):
         self.token = token
         self.api_url = "https://api.telegram.org/bot{}/".format(token)
+            
+  #  def translate (self, token2):
+   #     self.token2 = token2
+    #    self.api_url2 = "https://translate.yandex.net/api/v1.5/tr.json/translate"
+        
 
     def get_updates(self, offset=None, timeout=5):
         method = 'getUpdates'
@@ -64,8 +69,15 @@ def main():
         requestpost = requests.post(url2, data={'key': key, 'text': last_chat_text, 'lang': lang})
         response_data = requestpost.json()
         text = last_chat_text
+<<<<<<< HEAD
         print(last_chat_id)
 
+=======
+       tr = str(response_data["text"])
+        print (tr)
+        
+        
+>>>>>>> 7ef49e0829633d33356313998c85f206e2f75cb2
         if last_chat_text.lower() in greetings and now.day == today and 6 <= hour < 12:
             greet_bot.send_message(last_chat_id, 'Доброе утро, {}'.format(last_chat_name))
 ##            today += 1
@@ -79,7 +91,11 @@ def main():
 ##            today += 1
 
         elif last_chat_text.lower() not in greetings: 
+<<<<<<< HEAD
             greet_bot.send_message(last_chat_id, '{}'.format(response_data['text'][0]))
+=======
+            greet_bot.send_message(last_chat_id, '{}'.format(response_data["text"]))
+>>>>>>> 7ef49e0829633d33356313998c85f206e2f75cb2
 
         new_offset = last_update_id + 1
 
