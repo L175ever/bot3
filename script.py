@@ -74,7 +74,7 @@ def main():
 
         r = requests.post(url2, data={'key': key, 'text': last_chat_text, 'lang': lang})
         text = last_chat_text
-        perevod = requests.text
+        response.text
         
         if last_chat_text.lower() in greetings and now.day == today and 6 <= hour < 12:
             greet_bot.send_message(last_chat_id, 'Доброе утро, {}'.format(last_chat_name))
@@ -89,7 +89,7 @@ def main():
 ##            today += 1
 
         elif last_chat_text.lower() not in greetings: 
-            greet_bot.send_message(last_chat_id, '{}'.format(perevod))
+            greet_bot.send_message(last_chat_id, '{}'.format(response.text))
 
         new_offset = last_update_id + 1
 
