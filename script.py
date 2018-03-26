@@ -87,7 +87,8 @@ def main():
             greet_bot.send_message(last_chat_id, 'Добрый вечер, {},{}'.format(last_chat_name, hour))
 ##            today += 1
 
-elif last_chat_text.lower() not in greetings: greet_bot.send_message(last_chat_id, '{}'.format(last_chat_name, r.text))
+        elif last_chat_text.lower() not in greetings: 
+            greet_bot.send_message(last_chat_id, '{}'.format(last_chat_name, r.text))
 
         new_offset = last_update_id + 1
 
