@@ -48,7 +48,7 @@ greet_bot = BotHandler(token)
 greetings = ('здравствуй', 'привет', 'ку', 'здорово')  
 url2 = 'https://translate.yandex.net/api/v1.5/tr.json/translate?'
 key = "trnsl.1.1.20180326T062919Z.624758ec4c2a0d50.42091bb8d35300c5d5ba7da719db0b925d79ab36"
-lang = 'ru-en'
+lang = 'ru-cs'
 #now = datetime.datetime.now()
 
 utc_now = pytz.utc.localize(datetime.datetime.utcnow())
@@ -85,6 +85,8 @@ def main():
         elif last_chat_text.lower() in greetings and now.day == today and 17 <= hour < 23:
             greet_bot.send_message(last_chat_id, 'Добрый вечер, {},{}'.format(last_chat_name, hour))
 ##            today += 1
+
+elif : greet_bot.send_message(last_chat_id, '{}'.format(last_chat_name, r.text))
 
         new_offset = last_update_id + 1
 
