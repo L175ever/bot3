@@ -74,8 +74,9 @@ def main():
 
         r = requests.post(url2, data={'key': key, 'text': last_chat_text, 'lang': lang})
         
+        
         if last_chat_text.lower() in greetings and now.day == today and 6 <= hour < 12:
-            greet_bot.send_message(last_chat_id, 'Доброе утро, {}, {}'.format(last_chat_name,r.text))
+            greet_bot.send_message(last_chat_id, 'Доброе утро, {}, ', r.text .format(last_chat_name))
 ##            today += 1
 
         elif last_chat_text.lower() in greetings and now.day == today and 12 <= hour < 17:
