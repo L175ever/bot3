@@ -77,7 +77,7 @@ def main():
         print('id chat',last_chat_id, ' ', last_chat_name)
 
         if last_chat_id == 166965975:
-            greet_bot.send_message(505269223, '{}'.format(response_data['text'][0]))
+            greet_bot.send_message(166856335, '{}'.format(response_data['text'][0]))
         ##            today += 1
 
         elif now.day == today:
