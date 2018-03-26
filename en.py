@@ -43,8 +43,9 @@ token = "441518222:AAFSlYWYs7hMdj0S_w6fOIZuR76rFY1D5uY"
 greet_bot = BotHandler(token)
 greetings = ('здравствуй', 'привет', 'ку', 'здорово')
 url2 = 'https://translate.yandex.net/api/v1.5/tr.json/translate?'
+url3 = 'https://translate.yandex.net/api/v1.5/tr.json/detect?'
 key = "trnsl.1.1.20180326T062919Z.624758ec4c2a0d50.42091bb8d35300c5d5ba7da719db0b925d79ab36"
-lang = 'ru-cs'
+lang = 'ru-en'
 # now = datetime.datetime.now()
 utc_now = pytz.utc.localize(datetime.datetime.utcnow())
 now = utc_now.astimezone(pytz.timezone("Europe/Moscow"))
@@ -71,18 +72,25 @@ def main():
         with open('dump.dat', 'rb') as dump_in:
             der = pickle.load(dump_in)
 
-        requestpost = requests.post(url2, data={'key': key, 'text': last_chat_text, 'lang': lang})
-        response_data = requestpost.json()
+        requestpost2 = requests.post(url3, data={'key': key, 'text': last_chat_text, 'hint': 'cs,ru'})
+        response_data2 = requestpost2.json()
+        tr = response_data2['lang']
+        print(tr)
+        requestpost_ru = requests.post(url2, data={'key': key, 'text': last_chat_text, 'lang': 'ru'})
+        requestpost_cs = requests.post(url2, data={'key': key, 'text': last_chat_text, 'lang': 'cs'})
+        response_data_ru = requestpost_ru.json()
+        response_data_cs = requestpost_cs.json()
+
         text = last_chat_text
         print('id chat',last_chat_id, ' ', last_chat_name)
 
-        if last_chat_id == 166965975:
-            greet_bot.send_message(166856335, '{}'.format(response_data['text'][0]))
+        if last_chat_id == 166965975 and (tr == 'ru' or tr == 'cs'):
+            greet_bot.send_message(166856335, '{}'.format(response_data_cs['text'][0]))
         ##            today += 1
 
         elif now.day == today:
 
-            greet_bot.send_message(166965975, '{}'.format(response_data['text'][0]))
+            greet_bot.send_message(166965975, '{}'.format(response_data_ru['text'][0]))
 
         new_offset = last_update_id + 1
         last_chat_id = str(last_chat_id)
