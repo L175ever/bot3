@@ -89,7 +89,7 @@ def main():
 ##            today += 1
 
         elif last_chat_text.lower() not in greetings: 
-            greet_bot.send_message(last_chat_id, '{},{}'.format(last_chat_name, perevod))
+            greet_bot.send_message(last_chat_id, '{} {} {}'.format(perevod,text, r.text))
 
         new_offset = last_update_id + 1
 
