@@ -75,7 +75,9 @@ def main():
         requestpost = requests.post(url2, data={'key': key, 'text': last_chat_text, 'lang': lang})
         response_data = requestpost.json()
         text = last_chat_text
+        tr = response_data.remove([','])
         print (type(response_data["text"]))
+        
         
         if last_chat_text.lower() in greetings and now.day == today and 6 <= hour < 12:
             greet_bot.send_message(last_chat_id, 'Доброе утро, {}'.format(last_chat_name))
