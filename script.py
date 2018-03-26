@@ -1,11 +1,7 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-
-
-import requests  
+import requests
 import datetime
 import pytz
+import re
 
 
 class BotHandler:
@@ -37,18 +33,19 @@ class BotHandler:
 
         return last_update
 
-## TOKEN - INSERT YOUR TOKEN HERE
+
 token = "441518222:AAFSlYWYs7hMdj0S_w6fOIZuR76rFY1D5uY"
 greet_bot = BotHandler(token)  
 greetings = ('здравствуй', 'привет', 'ку', 'здорово')  
+url2 = 'https://translate.yandex.net/api/v1.5/tr.json/translate?'
+key = "trnsl.1.1.20180326T062919Z.624758ec4c2a0d50.42091bb8d35300c5d5ba7da719db0b925d79ab36"
+lang = 'ru-cs'
 #now = datetime.datetime.now()
-
 utc_now = pytz.utc.localize(datetime.datetime.utcnow())
 now = utc_now.astimezone(pytz.timezone("Europe/Moscow"))
-
 print (now)
 
-def main():  
+def main():
     new_offset = None
     today = now.day
     hour = now.hour
@@ -64,6 +61,11 @@ def main():
         last_chat_id = last_update['message']['chat']['id']
         last_chat_name = last_update['message']['chat']['first_name']
 
+        requestpost = requests.post(url2, data={'key': key, 'text': last_chat_text, 'lang': lang})
+        response_data = requestpost.json()
+        text = last_chat_text
+        print(last_chat_id)
+
         if last_chat_text.lower() in greetings and now.day == today and 6 <= hour < 12:
             greet_bot.send_message(last_chat_id, 'Доброе утро, {}'.format(last_chat_name))
 ##            today += 1
@@ -73,8 +75,11 @@ def main():
 ##            today += 1
 
         elif last_chat_text.lower() in greetings and now.day == today and 17 <= hour < 23:
-            greet_bot.send_message(last_chat_id, 'Добрый вечер, {},{}'.format(last_chat_name, hour))
+            greet_bot.send_message(last_chat_id, 'Добрый вечер, {}'.format(last_chat_name))
 ##            today += 1
+
+        elif last_chat_text.lower() not in greetings: 
+            greet_bot.send_message(last_chat_id, '{}'.format(response_data['text'][0]))
 
         new_offset = last_update_id + 1
 
