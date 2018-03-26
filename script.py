@@ -49,7 +49,6 @@ greetings = ('здравствуй', 'привет', 'ку', 'здорово')
 url2 = 'https://translate.yandex.net/api/v1.5/tr.json/translate?'
 key = "trnsl.1.1.20180326T062919Z.624758ec4c2a0d50.42091bb8d35300c5d5ba7da719db0b925d79ab36"
 lang = 'ru-cs'
-text = last_chat_text
 #now = datetime.datetime.now()
 
 utc_now = pytz.utc.localize(datetime.datetime.utcnow())
@@ -74,6 +73,7 @@ def main():
         last_chat_name = last_update['message']['chat']['first_name']
 
         r = requests.post(url2, data={'key': key, 'text': last_chat_text, 'lang': lang})
+        text = last_chat_text
         perevod = r.text
         
         if last_chat_text.lower() in greetings and now.day == today and 6 <= hour < 12:
