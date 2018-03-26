@@ -75,8 +75,8 @@ def main():
         requestpost = requests.post(url2, data={'key': key, 'text': last_chat_text, 'lang': lang})
         response_data = requestpost.json()
         text = last_chat_text
-       
-        print (response_data.items())
+       tr = str(response_data["text"])
+        print (tr)
         
         
         if last_chat_text.lower() in greetings and now.day == today and 6 <= hour < 12:
