@@ -13,6 +13,11 @@ class BotHandler:
     def __init__(self, token):
         self.token = token
         self.api_url = "https://api.telegram.org/bot{}/".format(token)
+            
+  #  def translate (self, token2):
+   #     self.token2 = token2
+    #    self.api_url2 = "https://translate.yandex.net/api/v1.5/tr.json/translate"
+        
 
     def get_updates(self, offset=None, timeout=5):
         method = 'getUpdates'
@@ -41,6 +46,9 @@ class BotHandler:
 token = "441518222:AAFSlYWYs7hMdj0S_w6fOIZuR76rFY1D5uY"
 greet_bot = BotHandler(token)  
 greetings = ('здравствуй', 'привет', 'ку', 'здорово')  
+url2 = 'https://translate.yandex.net/api/v1.5/tr.json/translate?'
+key = "trnsl.1.1.20180326T062919Z.624758ec4c2a0d50.42091bb8d35300c5d5ba7da719db0b925d79ab36"
+lang = 'ru-en'
 #now = datetime.datetime.now()
 
 utc_now = pytz.utc.localize(datetime.datetime.utcnow())
@@ -64,8 +72,10 @@ def main():
         last_chat_id = last_update['message']['chat']['id']
         last_chat_name = last_update['message']['chat']['first_name']
 
+        r = requests.post(url2, data={'key': key, 'text': last_chat_text, 'lang': lang})
+        
         if last_chat_text.lower() in greetings and now.day == today and 6 <= hour < 12:
-            greet_bot.send_message(last_chat_id, 'Доброе утро, {}'.format(last_chat_name))
+            greet_bot.send_message(last_chat_id, 'Доброе утро, {}, {}'.format(last_chat_name,r))
 ##            today += 1
 
         elif last_chat_text.lower() in greetings and now.day == today and 12 <= hour < 17:
